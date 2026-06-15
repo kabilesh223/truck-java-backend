@@ -44,9 +44,9 @@ public class Trip {
     public void preUpdate() { calculateTotals(); }
 
     public void calculateTotals() {
-        double tt = s(toll) + s(commission) + s(fuelAmount) + s(expenses) + s(advance);
+        double tt = s(toll) + s(commission) + s(fuelAmount) + s(expenses);
         this.totalTripAmount = Math.round(tt * 100.0) / 100.0;
-        this.balanceAmount   = Math.round((s(freight) - tt - s(billAmount)) * 100.0) / 100.0;
+        this.balanceAmount   = Math.round((s(freight) - tt - s(advance) - s(billAmount)) * 100.0) / 100.0;
     }
 
     private double s(Double v) { return v == null ? 0 : v; }
