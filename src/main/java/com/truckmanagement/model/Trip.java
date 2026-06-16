@@ -44,9 +44,10 @@ public class Trip {
     public void preUpdate() { calculateTotals(); }
 
     public void calculateTotals() {
-        double tt = s(toll) + s(commission) + s(fuelAmount) + s(expenses);
-        this.totalTripAmount = Math.round(tt * 100.0) / 100.0;
-        this.balanceAmount   = Math.round((s(freight) - tt - s(advance) - s(billAmount)) * 100.0) / 100.0;
+        double total = (s(freight) + s(toll) + s(commission) + s(fuelAmount) + s(expenses))
+                     - (s(billAmount) + s(advance));
+        this.totalTripAmount = Math.round(total * 100.0) / 100.0;
+        this.balanceAmount   = this.totalTripAmount; // same value, kept for Excel report
     }
 
     private double s(Double v) { return v == null ? 0 : v; }
